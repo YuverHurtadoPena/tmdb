@@ -1,5 +1,8 @@
 package movie.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import movie.dao.ImovieDao;
 import movie.dto.Message;
 import movie.dto.MovieDetail;
+import movie.dto.MovieDetailFree;
 import movie.dto.Result;
 
 /**
@@ -40,11 +44,30 @@ public class MovieServiceImpl implements IMovieService {
 	}
 
 	@Override
-	public ResponseEntity<?> getMovies() {
+	public ResponseEntity<?> getMovies(int numberPage) {
+		int limitInit = (numberPage - 1) * 10;
+		int limitEnd = numberPage * 10;
 		ResponseEntity<Result> result = movieDao.getMovies();
+		List<MovieDetailFree> lista = new ArrayList<>();
 
 		if (result != null) {
-			return new ResponseEntity(result.getBody(), HttpStatus.OK);
+			System.out.println(21 % limitEnd);
+
+			if (result.getBody().getResults().size() / limitEnd > 0) {
+				for (int i = limitInit; i < limitEnd; i++) {
+
+					lista.add(result.getBody().getResults().get(i));
+				}
+			} else if (result.getBody().getResults().size() / limitEnd > 0
+					&& result.getBody().getResults().size() % limitEnd > 0) {
+				for (int i = limitInit; i < result.getBody().getResults().size(); i++) {
+
+					lista.add(result.getBody().getResults().get(i));
+				}
+
+			}
+
+			return new ResponseEntity(lista, HttpStatus.OK);
 
 		} else {
 			return new ResponseEntity(new Message("Sin peliculas"), HttpStatus.NOT_FOUND);

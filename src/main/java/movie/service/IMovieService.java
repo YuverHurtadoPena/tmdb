@@ -24,6 +24,6 @@ public interface IMovieService {
 	 * 
 	 * @return
 	 */
-	public ResponseEntity<?> getMovies();
+	public ResponseEntity<?> getMovies(int numberPage);
 
 }
