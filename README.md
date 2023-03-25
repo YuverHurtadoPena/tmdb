@@ -2,7 +2,7 @@ La prueba se realizo con la version de 17 de java y la version 3 de spring boot.
 Se uno restTamplate para la comunicacion la el api de TMDB, para ciertos metodos get.
 La aplicacion tiene su documentcion con swagger.
 Se hizo el despliegue en AWS.
-El de aplicacion desplejada es: http://pruebatalataa-env.eba-vgujp7mx.us-east-2.elasticbeanstalk.com/swagger-ui/index.html#/
+El link de aplicacion desplejada es: http://pruebatalataa-env.eba-vgujp7mx.us-east-2.elasticbeanstalk.com/swagger-ui/index.html#/
 
 ¿QUE SE PUEDE HACER EN LA APLICACION?
 1.permite consultar u obtener las peliculas de la api TMDB 
